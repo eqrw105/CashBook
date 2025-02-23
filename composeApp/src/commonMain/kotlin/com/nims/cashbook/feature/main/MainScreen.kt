@@ -21,9 +21,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 @Preview
-fun MainScreen(
-    viewModel: MainViewModel = viewModel { MainViewModel() }
-) {
+fun MainScreen(viewModel: MainViewModel = viewModel { MainViewModel() }) {
     val showContent by viewModel.showContent.collectAsStateWithLifecycle()
     Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
         Button(onClick = { viewModel.updateShowContent(!showContent) }) {
@@ -31,7 +29,10 @@ fun MainScreen(
         }
         AnimatedVisibility(showContent) {
             val greeting = remember { Greeting().greet() }
-            Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+            Column(
+                Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
                 Image(painterResource(Res.drawable.compose_multiplatform), null)
                 Text("Compose: $greeting")
             }
