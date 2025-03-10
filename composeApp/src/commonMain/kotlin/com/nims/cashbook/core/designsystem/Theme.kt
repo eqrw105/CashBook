@@ -12,10 +12,18 @@ object CashBookTheme {
         @Composable
         @ReadOnlyComposable
         get() = LocalColors.current
+
+    val typography: CashBookTypography
+        @Composable
+        @ReadOnlyComposable
+        get() = LocalTypography.current
 }
 
 @Composable
-fun CashBookTheme(content: @Composable () -> Unit) {
+fun CashBookTheme(
+    typography: CashBookTypography = CashBookTypography(),
+    content: @Composable () -> Unit,
+) {
     val isDarkMode = isSystemInDarkTheme()
     val colors =
         if (isDarkMode) {
@@ -26,6 +34,7 @@ fun CashBookTheme(content: @Composable () -> Unit) {
 
     CompositionLocalProvider(
         LocalColors provides colors,
+        LocalTypography provides typography,
     ) {
         MaterialTheme(
             colors = colors,
